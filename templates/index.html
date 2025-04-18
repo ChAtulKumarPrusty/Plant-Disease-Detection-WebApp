@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Prediction</title>
+    <style>
+        /* Make the video container fill the viewport */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Style the entire body to make sure content is visible */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center the content and form */
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 75%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1.2rem;
+            opacity: 75%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Navbar styles */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .navbar ul li {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        .navbar ul li:hover .dropdown {
+            display: block;
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 30px;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 8px 12px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .dropdown a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown:hover {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="/">Home</a></li> <!-- Flask route for Home -->
+            <li><a href="/about">About Us</a></li> <!-- Flask route for About -->
+        </ul>
+    </div>
+    <div class="video-container">
+        <video autoplay muted loop class="background-video">
+            <source src="https://cdn.pixabay.com/video/2020/10/11/52078-467145335_large.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="content">
+        <h1>Plant Leaf Detection</h1>
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+            <button class="btn">
+                <input type="file" name="file" accept="image/*" required>
+            </button>
+            <button type="submit"class="btn">Predict</button>
+        </form>
+    </div>
+</body>
+</html>

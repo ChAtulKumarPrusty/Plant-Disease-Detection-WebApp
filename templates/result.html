@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        /* Make the video container fill the viewport */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Style the entire body to make sure content is visible */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Center the content and form */
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        /* Style for all the buttons */
+        .btn {
+            width: 250px; /* Set a fixed width for uniform size */
+            height: 50px; /* Set a fixed height for uniform size */
+            padding: 10px 0; /* Adjust padding for centering text */
+            margin: 10px;
+            font-size: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 75%;
+            /* Remove underline for any links inside button */
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        /* Search icon for the upload button */
+        .btn img {
+            opacity: 75%;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .img-preview {
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        /* Remove underline from links inside buttons */
+        .btn p {
+            margin: 0;
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="/index">Home</a></li> <!-- Flask route for Home -->
+            <li><a href="/about">About Us</a></li> <!-- Flask route for About -->
+        </ul>
+    </div>
+    <div class="video-container">
+        <video autoplay muted loop class="background-video">
+            <source src="https://cdn.pixabay.com/video/2020/10/11/52078-467145335_large.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="content">
+        <h1>Prediction Result</h1>
+        <!-- Display the uploaded image with a preview -->
+        <div class="img-preview">
+                <p><img src="data:image/png;base64, {{ image_base64 }}" alt="Uploaded Image" /></p>
+        </div>
+        <!-- Display the predicted disease as a button -->
+        <p>Predicted Disease: {{ prediction }}</p>
+
+        <!-- Upload another image button with a search icon -->
+            <button class="btn">
+                 <a style="text-decoration: none;" href="{{ url_for('index') }}">Upload Another Image</a>
+            </button>
+
+    </div>
+</body>
+</html>
